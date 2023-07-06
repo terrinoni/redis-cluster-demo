@@ -100,6 +100,23 @@ services:
     networks:
       redis_cluster_net:
         ipv4_address: 173.18.0.8
+  
+  redis_insight:
+    container_name: redis_insight
+    image: docker.io/redislabs/redis-insight:latest
+    ports:
+      - "8001:8001"
+    depends_on:
+      - redis_1
+      - redis_2
+      - redis_3
+      - redis_4
+      - redis_5
+      - redis_6
+      - cluster_initiator
+    networks:
+      redis_cluster_net:
+        ipv4_address: 173.18.0.10
 
   # Web UI to browse through our Redis data across all nodes
   redis_commander:
